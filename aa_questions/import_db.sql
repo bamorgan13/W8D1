@@ -64,9 +64,9 @@ CREATE TABLE question_likes (
 INSERT INTO
     users (fname, lname)
 VALUES
-    (Bryce, Morgan),
-    (Ryon, Stiller),
-    (Deric, Stiller);
+    ("Bryce", "Morgan"),
+    ("Ryon", "Stiller"),
+    ("Deric", "Stiller");
 
 INSERT INTO
     questions (title, body, user_id)
