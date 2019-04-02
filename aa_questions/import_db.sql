@@ -89,7 +89,7 @@ INSERT INTO
     replies (question_id, parent_reply_id, user_id, body)
 VALUES
     (2, NULL, 1, "A03 is scheduled for Monday. Anyone know when the last of the material will be covered for it?"),
-    (2, (SELECT id FROM replies WHERE body LIKE "A03 is scheduled%"), 3, "Tuesday should be the last day for new material for A03."),
+    (2, 1, 3, "Tuesday should be the last day for new material for A03."),
     (3, NULL, 2, "Check the SQLite3 section under Materials. There''s a note for Linux there.");
 
 INSERT INTO

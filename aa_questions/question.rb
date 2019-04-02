@@ -3,7 +3,7 @@ require_relative 'questions_database'
 class Question
 
     def self.find_by_id(id)
-        data = QuestionDatabase.instance.execute(<<-SQL, id)
+        data = QuestionsDatabase.instance.execute(<<-SQL, id)
             SELECT
                 *
             FROM
@@ -11,7 +11,7 @@ class Question
             WHERE
                 id = ?
         SQL
-        return nil unless data.id
+        return nil unless data.first['id']
 
         Question.new(data.first)
     end
