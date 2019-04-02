@@ -85,4 +85,28 @@ class Reply
         Reply.find_by_parent_id(id)
     end
 
+    def save
+        if @id
+            QuestionsDatabase.instance.execute(<<-SQL, question_id, parent_reply_id, user_id, body, id)
+                UPDATE
+                    questions
+                SET
+                    question_id = ?,
+                    parent_reply_id = ?
+                    user_id = ?
+                    body = ?
+                WHERE
+                    id = ?
+            SQL
+        else
+            QuestionsDatabase.instance.execute(<<-SQL, question_id, parent_reply_id, user_id, body)
+                INSERT INTO
+                    questions (question_id, parent_reply_id, user_id, body)
+                VALUES
+                    (?, ?, ?, ?)
+            SQL
+            @id = QuestionsDatabase.instance.last_insert_row_id
+        end
+        self
+    end
 end
