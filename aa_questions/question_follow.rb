@@ -16,6 +16,40 @@ class QuestionFollow
         QuestionFollow.new(data.first)
     end
 
+    def self.followers_for_question_id(question_id)
+        data = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+            SELECT
+                users.*
+            FROM
+                users
+            JOIN
+                question_follows
+            ON
+                users.id = question_follows.user_id
+            WHERE
+                question_follows.question_id = ?
+        SQL
+
+        data.map {|datum| User.new(datum)}
+    end
+
+    def self.followed_questions_for_user_id(user_id)
+        data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+            SELECT
+                questions.*
+            FROM
+                questions
+            JOIN
+                question_follows
+            ON
+                questions.id = question_follows.question_id
+            WHERE
+                question_follows.user_id = ?
+        SQL
+
+        data.map {|datum| Question.new(datum)}
+    end
+
     attr_accessor :user_id, :question_id
     attr_reader :id
 
