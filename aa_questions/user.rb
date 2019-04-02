@@ -35,8 +35,7 @@ class User
         User.new(data.first)
     end
 
-    attr_accessor :fname, :lname
-    attr_reader :id
+    attr_accessor :fname, :lname, :id
 
     def initialize(options)
         @id = options['id']

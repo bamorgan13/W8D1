@@ -41,8 +41,7 @@ class Question
         QuestionLike.most_liked_questions(n)
     end
 
-    attr_accessor :title, :body, :user_id
-    attr_reader :id
+    attr_accessor :title, :body, :user_id, :id
 
     def initialize(options)
         @id = options['id']

@@ -58,8 +58,7 @@ class Reply
         data.map {|datum| Reply.new(datum)}
     end
 
-    attr_accessor :question_id, :parent_reply_id, :user_id, :body
-    attr_reader :id
+    attr_accessor :question_id, :parent_reply_id, :user_id, :body, :id
 
     def initialize(options)
         @id = options['id']

@@ -73,8 +73,7 @@ class QuestionFollow
         data.map {|datum| Question.new(datum)}
     end
 
-    attr_accessor :user_id, :question_id
-    attr_reader :id
+    attr_accessor :user_id, :question_id, :id
 
     def initialize(options)
         @id = options['id']
