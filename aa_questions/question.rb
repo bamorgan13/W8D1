@@ -1,4 +1,8 @@
 require_relative 'questions_database'
+require_relative 'user'
+require_relative 'reply'
+require_relative 'question_follow'
+require_relative 'question_like'
 
 class Question
 
@@ -14,6 +18,19 @@ class Question
         return nil unless data.first['id']
 
         Question.new(data.first)
+    end
+
+    def self.find_by_author_id(author_id)
+        data = QuestionsDatabase.instance.execute(<<-SQL, author_id)
+            SELECT
+                *
+            FROM
+                questions
+            WHERE
+                user_id = ?
+        SQL
+
+        data.map {|datum| Question.new(datum)}
     end
 
     attr_accessor :title, :body, :user_id
