@@ -67,6 +67,27 @@ class QuestionLike
         data.map {|datum| Question.new(datum)}
     end
 
+    def self.most_liked_questions(n)
+        data = QuestionsDatabase.instance.execute(<<-SQL, n)
+            SELECT
+                questions.*
+            FROM
+                questions
+            JOIN
+                question_likes
+            ON
+                questions.id = question_likes.question_id
+            GROUP BY
+                questions.id
+            ORDER BY
+                COUNT(*) DESC
+            LIMIT
+                n
+        SQL
+
+        data.map {|datum| Question.new(datum)}
+    end
+
     attr_accessor :user_id, :question_id
     attr_reader :id
 
