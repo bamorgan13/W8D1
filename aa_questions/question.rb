@@ -33,6 +33,10 @@ class Question
         data.map {|datum| Question.new(datum)}
     end
 
+    def self.most_followed(n)
+        QuestionFollow.most_followed_questions(n)
+    end
+
     attr_accessor :title, :body, :user_id
     attr_reader :id
 
